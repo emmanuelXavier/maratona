@@ -1,0 +1,55 @@
+table .action{
+	width: 60px;
+	text-align: center;
+}
+table  .quant{
+	width: 60px;
+	text-align: center;
+}
+
+
+table .identificador{
+	width: 60px;
+	text-align: center;
+}
+
+footer.footer{
+	width: 100%;
+	background: #f7f7f7;
+	padding-top: 10px;
+}
+
+footer.fixed{
+	position: fixed;
+	bottom:0;
+}
+
+table.acompanhamento{
+	font-size: 2rem;
+}
+
+.baloes{
+	border-radius: 50%;
+	position:relative;
+	font-size: 0.8rem;
+	float:left;
+	margin-right: 20px;
+	bottom:0;
+	height: 60px;
+	width:40px;
+}
+
+.green{
+	background: green;
+}
+
+.yellow{
+	background: yellow;
+}
+
+.red{
+
+	background: red;
+}
+
+
