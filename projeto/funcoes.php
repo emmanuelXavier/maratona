@@ -1,5 +1,5 @@
 <?php
-// ini_set("display_errors","on");
+ini_set("display_errors","off");
 
 function conectar(){
 	$host = "localhost";
@@ -32,6 +32,7 @@ function salvarEquipe($id,$nome,$tecnico){
 	else
 		$sql = "update equipe set nome ='$nome',tecnico ='$tecnico' where id = '$id'";
 	if (mysql_query($sql))
+
 		$result = true;
 	else
 		$result = false;
@@ -72,6 +73,7 @@ function excluirEquipe($id){
 	$conexao = conectar();
 	$sql = "delete from equipe where id = '$id'";
 	if (mysql_query($sql))
+
 		$result = true;
 	else
 		$result = false;
@@ -149,6 +151,5 @@ if (isset($_REQUEST["event"])){
 	header("Location: " . $_REQUEST["view"] . "-" .$code);
 
 }
-
 
 
