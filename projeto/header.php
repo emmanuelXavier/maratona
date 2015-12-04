@@ -12,7 +12,6 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="justified-nav.css" rel="stylesheet">
     <link href="static/css/base.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -22,9 +21,6 @@
   </head>
 
   <body>
-
-    
-
     <div class="container">
       <div class="masthead">
         <h3>Sistema Web de Gestão de Maratonas</h3>

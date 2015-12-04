@@ -2,8 +2,6 @@
 ini_set("display_errors","off");
 //error_reporting(E_ALL & ~E_NOTICE);
 header('charset = utf-8'); 
-session_name("loginUserMege");
-session_start();
 require_once('funcoes.php');
 require_once('header.php');
 $vetor = explode('-',$_GET['nav']);

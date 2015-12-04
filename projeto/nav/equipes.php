@@ -57,18 +57,15 @@
             $equipes = listar("equipe");
             foreach ($equipes as $equipe):
             ?>
-              <tr>
+              <tr data-codigo="<?=$equipe->id?>" data-nome="<?=$equipe->nome?>" data-tecnico="<?=$equipe->tecnico?>">
                 <th class="identificador" scope="row">
                   <?=$equipe->id?>
-                  <input type="hidden" class="id" value="<?=$equipe->id?>">
                 </th>
                 <td>
                   <?=$equipe->nome?>
-                  <input type="hidden" class="nome" value="<?=$equipe->nome?>">
                 </td>
                 <td>
                   <?=$equipe->tecnico?>
-                  <input type="hidden" class="tecnico" value="<?=$equipe->tecnico?>">
                 </td>
                 <td class="action">
                   <a href="#" onclick="editar(this)" data-toggle="modal" data-target="#modal-cadastro">
@@ -90,9 +87,9 @@
       <script>
 
         var editar = function(obj){
-          $('#id').val($(obj).closest('tr').find('.id').val());
-          $('#nome').val($(obj).closest('tr').find('.nome').val()); 
-          $('#tecnico').val($(obj).closest('tr').find('.tecnico').val());
+          $('#id').val($(obj).closest('tr').data("codigo"));
+          $('#nome').val($(obj).closest('tr').data("nome")); 
+          $('#tecnico').val($(obj).closest('tr').data("tecnico"));
         }
 
         var add = function(){
