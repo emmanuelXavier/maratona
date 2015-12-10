@@ -26,7 +26,7 @@ function desconectar ( $con )
  */
 function query($query){
     $conn = conectar();
-    $result = mysqli_query($query,$conn);
+    $result = mysqli_query($conn,$query);
     if (is_bool($result))
         return $result;
     $lista = array();
@@ -87,16 +87,11 @@ function alterar($table, $fields, $values, $condicao = ""){
     $sql .= " $condicao";
     return query($sql);
 }
-function salvarDificuldade($id,$descricao,$peso,$cor){
-    $fields = array("descricao","peso","cor");
-    $values = array($descricao,$peso,$cor);
-    if ((is_null($id)) || ($id == ''))
-        return salvar("dificuldade", $fields, $values);
-    return alterar("dificuldade",$fields,$values,"where id = '$id'");
-}
+
 function excluirDificuldade($id){
     return excluir("dificuldade",$id);
 }
+
 function salvarEquipe ( $id , $nome , $tecnico )
 {
     $conexao = conectar ();
@@ -205,6 +200,22 @@ function salvarMaratona ( $id , $nome , $juiz , $datainicio , $datafim )
     desconectar ( $conexao );
     return $result;
 }
+
+function salvarDificuldade ( $id , $descricao , $peso , $cor )
+{
+    $conexao = conectar ();
+    if ( ( is_null ( $id ) ) || ( $id == '' ) )
+        $sql = "insert into dificuldade (descricao,peso,cor) values ('$descricao','$peso','$cor')";
+    else
+        $sql = "update dificuldade set descricao ='$descricao',peso ='$peso',cor = '$cor' where id = '$id'";
+    if ( mysqli_query ( $conexao , $sql ) )
+        $result = true;
+    else
+        $result = false;
+    desconectar ( $conexao );
+    return $result;
+}
+
 function excluirMaratona ( $id )
 {
     $conexao = conectar ();
@@ -237,6 +248,7 @@ function addQuestao($id, $titulo, $problema){
 
 
 if ( isset( $_REQUEST[ "event" ] ) ) {
+    try{
     switch ( $_REQUEST[ "event" ] ) {
         case 'excluirEquipe':
             $code = ( excluirEquipe ( $_REQUEST[ "id" ] ) ) ? "202" : "404";
@@ -248,7 +260,7 @@ if ( isset( $_REQUEST[ "event" ] ) ) {
             $code = ( excluirMaratona ( $_REQUEST[ "id" ] ) ) ? "202" : "404";
             break;
         case 'salvarEquipe':
-            $code = ( salvarEquipe ( $_REQUEST[ "id" ] , $_REQUEST[ "nome" ] , $_REQUEST[ "tecnico" ] ) ) ? "202" : "404";
+          $code = ( salvarEquipe ( $_REQUEST[ "id" ] , $_REQUEST[ "nome" ] , $_REQUEST[ "tecnico" ] ) ) ? "202" : "404";
             break;
         case 'salvarMembro':
             $code = ( salvarMembro ( $_REQUEST[ "id" ] , $_REQUEST[ "nome" ] , $_REQUEST[ "equipe" ] ) ) ? "202" : "404";
@@ -259,15 +271,25 @@ if ( isset( $_REQUEST[ "event" ] ) ) {
         case 'salvarMaratona':
             $code = ( salvarMaratona ( $_REQUEST[ "id" ] , $_REQUEST[ "nome" ] , $_REQUEST[ "juiz" ] , $_REQUEST[ "datainicio" ] , $_REQUEST[ "datafim" ] ) ) ? "202" : "404";
             break;
+        case 'salvarDificuldade':
+            $code = ( salvarDificuldade ( $_REQUEST[ "id" ] , $_REQUEST[ "descricao" ] , $_REQUEST[ "peso" ] , $_REQUEST[ "cor" ]) )? "202" : "404";
+            break;
+        case 'excluirDificuldade':
+            $code = ( excluirDificuldade ( $_REQUEST[ "id" ]) )? "202" : "404";
+            break;
         default:
             break;
     }
-    header ( "Location: " . $_REQUEST[ "view" ] . "-" . $code );
-}
 
+    header ( "Location: " . $_REQUEST[ "view" ] . "-" . $code );
+    }catch(Exception $ex){
+        echo $ex->getMessage();
+    }
+}
+/*
 $metodo = $_REQUEST['event'];
 if ($metodo){
     $parametros = array_diff_key($_REQUEST,array("event" =>"", "view"=>""));
     $code = call_user_func_array($metodo,$parametros)?"202":"404";
     header("Location: " . $_REQUEST["view"] . "-" .$code);
-}
+}*/

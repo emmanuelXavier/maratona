@@ -45,8 +45,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Maratona</a></li>
-                    <li><a href="#">Dificuldades</a></li>
+                    <li><a href="maratona">Maratona</a></li>
+                    <li><a href="dificuldades">Dificuldades</a></li>
                     <li><a href="#">Questões</a></li>
                     <li><a href="equipes">Equipes</a></li>
                     <li><a href="membros">Membros</a></li>
