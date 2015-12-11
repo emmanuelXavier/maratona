@@ -31,6 +31,7 @@ class Maratona{
 	public function setNome($nome)
 	{
 	    $this->nome = $nome;
+
 	}
 
 	public function getDatafim()
@@ -54,13 +55,24 @@ class Maratona{
 	}
 
 	public function salvar($con){
-		$sql = "insert into maratona (datainicio,nome,datafim,juiz) values ('$this->getDatainicio()','$this->getNome()','$this->getDatafim','$this->juiz')";
+		$sql = "insert into maratona (datainicio,nome,datafim,juiz) values ('{$this->getDatainicio()}','{$this->getNome()}','{$this->getDatafim()}','{$this->getJuiz()}')";
 		$res = mysqli_query($con,$sql);
-		if ($res)
-			return true;
-		else
-			return false;
+		return ($res)? true : false;
+	}
 
+	public static function excluir($con,$id){
+		$sql = "delete from maratona where id = '{$id}'";
+		$res = mysqli_query($con,$sql);
+		return ($res)? true : false;
+	}
+
+	public static function listar($con){
+		$sql = "select * from maratona";
+		$res = mysqli_query($con,$sql);
+		while ($obj = mysqli_fetch_object($res))
+			$lista[] = $obj;
+		
+		return $lista;
 	}
 	
 

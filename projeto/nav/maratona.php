@@ -1,9 +1,8 @@
 <?php
-// ini_set("display_errors","on");
+ // ini_set("display_errors","on");
 include_once "autoload.php";
 
 function salvar(){
-
     $maratona = new Maratona();
     $maratona->setDatainicio($_POST["datainicio"]);
     $maratona->setDatafim($_POST["datafim"]);
@@ -14,8 +13,16 @@ function salvar(){
 
 }
 
+function excluir(){
+   $_GET["id"] = (Maratona::excluir(Conexao::getConexao(),$_GET["id"]))? 202 : 404;
+
+}
+
 if ($_REQUEST["botao"] == "salvar")
     salvar();
+
+if (!is_null($_GET["id"]))
+    excluir();
 
 require_once("alert.php");
 ?>
@@ -86,7 +93,7 @@ require_once("alert.php");
             </thead>
             <tbody>
             <?php
-            $maratona = listar("maratona");
+            $maratona = Maratona::listar(Conexao::getConexao());
             foreach ($maratona as $maratonas):
                 ?>
                 <tr>
@@ -116,7 +123,7 @@ require_once("alert.php");
                         </a>
                     </td>
                     <td class="action">
-                        <a href="funcoes.php?event=excluirMaratona&id=<?=$maratonas->id?>&view=maratona">
+                        <a href="maratona-<?=$maratonas->id?>">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
                     </td>

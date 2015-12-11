@@ -43,10 +43,12 @@ function query($query){
  * @return boolean - invoca o metodo query, que devolve um
  *                   boolean para a operacao delete
  */
+/*
 function excluir($table,$id){
     $sql = "delete from $table where id = '$id'";
     return query($sql);
 }
+*/
 /**
  * @param $table - String, nome da tabela
  * @param $fields - array, vetor com nomes dos campos da tabela
